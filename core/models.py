@@ -6,6 +6,9 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+from usuarios.models import Usuarios
+from clientes.models import Clientes
+from ordem_servico.models import Os
 
 
 class Anexos(models.Model):
@@ -14,7 +17,7 @@ class Anexos(models.Model):
     thumb = models.CharField(max_length=45, blank=True, null=True)
     url = models.CharField(max_length=300, blank=True, null=True)
     path = models.CharField(max_length=300, blank=True, null=True)
-    os = models.ForeignKey('Os', models.DO_NOTHING)
+    os = models.ForeignKey(Os, models.DO_NOTHING)
 
     class Meta:
         managed = False
@@ -215,7 +218,7 @@ class Equipamentos(models.Model):
     potencia = models.CharField(max_length=45, blank=True, null=True)
     voltagem = models.CharField(max_length=45, blank=True, null=True)
     data_fabricacao = models.DateField(blank=True, null=True)
-    marcas = models.ForeignKey('Marcas', models.DO_NOTHING, blank=True, null=True)
+    marcas = models.ForeignKey("Marcas", models.DO_NOTHING, blank=True, null=True)
     clientes = models.ForeignKey(Clientes, models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
@@ -229,7 +232,7 @@ class EquipamentosOs(models.Model):
     defeito_encontrado = models.CharField(max_length=200, blank=True, null=True)
     solucao = models.CharField(max_length=45, blank=True, null=True)
     equipamentos = models.ForeignKey(Equipamentos, models.DO_NOTHING, blank=True, null=True)
-    os = models.ForeignKey('Os', models.DO_NOTHING, blank=True, null=True)
+    os = models.ForeignKey(Os, models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
         managed = False
